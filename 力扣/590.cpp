@@ -27,6 +27,7 @@ public:
         {
             return;
         }
+        
         for(auto& ch:root->children)
         {
             helper(ch,res);
