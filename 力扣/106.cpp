@@ -53,3 +53,32 @@ public:
         return traversal(inorder, postorder);
     }
 };
+
+//也是这个思路，但是做法更简单
+class Solution {
+public:
+    TreeNode* buildTree(vector<int>& inorder, vector<int>& postorder) {
+        post = postorder;
+        int index = postorder.size() - 1;
+        return build(inorder, 0, inorder.size() - 1, index);
+    }
+
+private:
+    TreeNode* build(vector<int>& inorder, int start, int end, int& index) {
+        if (start > end) {
+            return nullptr;
+        }
+        
+        int rootVal = post[index--];
+        TreeNode* root = new TreeNode(rootVal);
+        
+        int rootIndex = find(inorder.begin() + start, inorder.begin() + end, rootVal) - inorder.begin();
+        
+        root->right = build(inorder, rootIndex + 1, end, index);
+        root->left = build(inorder, start, rootIndex - 1, index);
+        
+        return root;
+    }
+
+    vector<int> post;
+};
