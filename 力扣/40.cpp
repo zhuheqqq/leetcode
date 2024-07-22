@@ -8,7 +8,7 @@ public:
             ans.push_back(path);
             return;
         }
-        for(int i = start; i < candidates.size(); i++){
+        for(int i = start; i < candidates.size() && sum + candidates[i] <= target; i++){
             if(i > start && candidates[i] == candidates[i - 1]){
                 continue;
             }
